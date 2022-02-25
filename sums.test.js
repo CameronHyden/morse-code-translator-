@@ -17,12 +17,12 @@ describe("get text and return a string of morse code representing its value", ()
 
     it("produce an error if invalid characters are inputted", () => {
         //Write tests in here 
-        const result = checkText("hello world;;")
+        const result = getTranslation("hello world;;")
         expect(result).toBe("error input, cannot translate ;;")
     });
     it("should lowercase all inputted text so it will match the saved values ", () => {
         //Write tests in here 
-        const result = checkText("Hello World")
+        const result =getTranslation("Hello World")
         expect(result).toBe("hello world")
     });
    

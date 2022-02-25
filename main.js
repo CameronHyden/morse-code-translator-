@@ -3,6 +3,7 @@ const userResultBox = document.querySelector("#text-output");
 const button = document.querySelector("#translate");
 const refreshButton = document.querySelector("#refresh");
 
+
 const morseCode = {
   a: ".-",
   b: "-...",
@@ -53,7 +54,7 @@ const getTranslation = () => {
 
   userResultBox.value = translation;
 };
-
+console.log(getTranslation("hello"))
 const runTranslation = () => {
   getTranslation();
 };
@@ -66,3 +67,4 @@ const clearTextFields = () =>{
 
 button.addEventListener("click", runTranslation);
 refreshButton.addEventListener("click", clearTextFields);
+
