@@ -1,5 +1,8 @@
 const userTextBox = document.querySelector("#text-input");
 const userResultBox = document.querySelector("#text-output");
+const button = document.querySelector("#translate");
+const refreshButton = document.querySelector("#refresh");
+
 const morseCode = {
   a: ".-",
   b: "-...",
@@ -39,8 +42,8 @@ const morseCode = {
   9: "----.",
   " ": "    ",
 };
-const convertToMorse = () => {
-  const translation = userTextBox.innerHTML
+const getTranslation = () => {
+  const translation = userTextBox.value
     .toLowerCase()
     .split("")
     .map((morse) => {
@@ -48,6 +51,18 @@ const convertToMorse = () => {
     })
     .join(" ");
 
-  userResultBox.innerHTML = translation;
+  userResultBox.value = translation;
 };
-convertToMorse();
+
+const runTranslation = () => {
+  getTranslation();
+};
+
+
+const clearTextFields = () =>{
+    userTextBox.value = ""
+    userResultBox.value = ""
+}
+
+button.addEventListener("click", runTranslation);
+refreshButton.addEventListener("click", clearTextFields);

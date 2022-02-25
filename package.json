@@ -2,7 +2,7 @@
   "name": "morse-code",
   "version": "1.0.0",
   "description": "",
-  "main": "script.js",
+  "main": "main.js",
   "scripts": {
     "test": "jest"
   },
@@ -12,6 +12,7 @@
   "devDependencies": {
     "@babel/core": "^7.17.5",
     "@babel/preset-env": "^7.16.11",
-    "babel-jest": "^27.5.1"
+    "babel-jest": "^27.5.1",
+    "jest": "^27.5.1"
   }
 }
