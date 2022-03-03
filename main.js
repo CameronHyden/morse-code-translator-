@@ -1,10 +1,19 @@
-const userTextBox = document.querySelector("#text-input");
-const userResultBox = document.querySelector("#text-output");
-const button = document.querySelector("#translate");
-const refreshButton = document.querySelector("#refresh");
+const englishInput = document.querySelector("#english-word");
+const morseTranslateResult = document.querySelector("#morse-translate-result");
+const morseInput = document.querySelector("#morse-word");
+const englishTranslateResult = document.querySelector("#english-translate-result");
 
-
-const morseCode = {
+const englishToMorse = {
+  0: "-----",
+  1: ".----",
+  2: "..---",
+  3: "...--",
+  4: "....-",
+  5: ".....",
+  6: "-....",
+  7: "--...",
+  8: "---..",
+  9: "----.",
   a: ".-",
   b: "-...",
   c: "-.-.",
@@ -31,40 +40,108 @@ const morseCode = {
   x: "-..-",
   y: "-.--",
   z: "--..",
-  0: "-----",
-  1: ".----",
-  2: "..---",
-  3: "...--",
-  4: "....-",
-  5: ".....",
-  6: "-....",
-  7: "--...",
-  8: "---..",
-  9: "----.",
-  " ": "    ",
-};
-const getTranslation = () => {
-  const translation = userTextBox.value
-    .toLowerCase()
-    .split("")
-    .map((morse) => {
-      return morseCode[morse] ? morseCode[morse] : morse;
-    })
-    .join(" ");
-
-  userResultBox.value = translation;
-};
-console.log(getTranslation("hello"))
-const runTranslation = () => {
-  getTranslation();
+  ".": ".-.-.-",
+  ",": "--..--",
+  "?": "..--..",
+  "!": "-.-.--",
+  "-": "-....-",
+  "/": "-..-.",
+  "@": ".--.-.",
+  "(": "-.--.",
+  ")": "-.--.-",
 };
 
+const morseToEnglish = {
+  "-----": "0",
+  ".----": "1",
+  ".----": "2",
+  ".----": "3",
+  ".----": "4",
+  ".....": "5",
+  "-....": "6",
+  "--...": "7",
+  "---..": "8",
+  "----.": "9",
+  ".-": "a",
+  "-...": "b",
+  "-.-.": "c",
+  "-..": "d",
+  ".": "e",
+  "..-.": "f",
+  "--.": "g",
+  "....": "h",
+  "..": "i",
+  ".---": "j",
+  "-.-": "k",
+  ".-..": "l",
+  "--": "m",
+  "-.": "n",
+  "---": "o",
+  ".--.": "p",
+  "--.-": "q",
+  ".-.": "r",
+  "...": "s",
+  "-": "t",
+  "..-": "u",
+  "...-": "v",
+  ".--": "w",
+  "-..-": "x",
+  "-.--": "y",
+  "--..": "z",
+  ".-.-.-": ".",
+  "--..--": ",",
+  "..--..": "?",
+  "-.-.--": "!",
+  "-....-": "-",
+  "-..-.": "/",
+  ".--.-.": "@",
+  "-.--.": "(",
+  "-.--.-": ")",
+  " ": " "
+};
 
-const clearTextFields = () =>{
-    userTextBox.value = ""
-    userResultBox.value = ""
+// english to morse translator
+ const translateEnglishToMorse = (englishWord) => {
+  if (typeof englishWord !== "string") {
+    return "invalid input";
+  }
+
+  const lowerCaseWord = englishWord.toLowerCase();
+  const morseArray = lowerCaseWord.split("").map((character) => {
+    return englishToMorse[character];
+  });
+
+  return morseArray.join(" ");
+};
+
+
+//morse to english 
+
+const decodeLetter = character => {
+  return morseToEnglish[character];
 }
 
-button.addEventListener("click", runTranslation);
-refreshButton.addEventListener("click", clearTextFields);
+const decodeWord = word => {
+  return word.split(' ').map(decodeLetter).join('');
+}
 
+const decodeMorse = morseCode => {
+  return morseCode.trim().split('  ').map(decodeWord).join(' ');
+}
+
+const handleMorseInput = (event) => {
+  const inputValue = event.target.value;
+  const result = decodeMorse(inputValue);
+  englishTranslateResult.innerText = result;
+};
+
+
+
+const handleInput = (event) => {
+  const inputValue = event.target.value;
+  const result = translateEnglishToMorse(inputValue);
+  morseTranslateResult.innerText = result;
+};
+
+englishInput.addEventListener("input", handleInput);
+morseInput.addEventListener("input", handleMorseInput);

@@ -7,20 +7,20 @@
     <title>Document</title>
     <script src="main.js" defer></script>
     <link rel="stylesheet" href="styles.css">
+    
 </head>
 <body>
     <h1>Morse Code Translator</h1>
     <div id="translator__container">
         
-          <label for="text-input">Enter your text here</label>
-          <textarea class="morse-control" name="text-input" id="text-input" rows="3">Hello World</textarea>
+        <label for="english-word">English to Morse</label>
+        <input id="english-word" type="text" />
+        <p id="morse-translate-result"></p>
 
-          <label for="text-ouput">Morse code translation</label>
-          <textarea class="morse-control" name="text-output" id="text-output" rows="3"> </textarea>
-           <button id="translate">translate</button> 
-           <button id="refresh">refresh</button> 
-
-           
+        <label for="Morse">Morse to english</label>
+        <input id="morse-word" type="text" />
+        <p id="english-translate-result"></p>
+        <script src="./main.js" type="module"></script>
     </div>
 </body>
 </html>
